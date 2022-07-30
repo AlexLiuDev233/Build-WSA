@@ -374,8 +374,9 @@ jobs:
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
           cd system
-          mkdir etc
+          ls
           cd etc
+          ls
           sudo mkdir -p system/etc/security/cacerts
           sudo cp 87bc3517.0 system/etc/security/cacerts
           cd ..
