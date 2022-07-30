@@ -361,7 +361,7 @@ jobs:
           sudo mount -o loop ${{ matrix.arch }}/product.img system/product
           sudo mount -o loop ${{ matrix.arch }}/system_ext.img system/system_ext
       - name: Download User CA
-        if: ${{ github.event.inputs.add_userca == 'add' }}
+        if: ${{ github.event.inputs.add_userca != 'add' }}
         shell: python
         run: |
           import requests
@@ -373,6 +373,8 @@ jobs:
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
+          wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
+          mv ca.0 87bc3517.0
           ls
           cd system
           ls
