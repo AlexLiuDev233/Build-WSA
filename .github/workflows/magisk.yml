@@ -372,9 +372,8 @@ jobs:
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
-          sudo mkdir system/etc/security
-          sudo mkdir system/etc/security/cacerts
-          sudo cp 87bc3517.0 system/etc/security/cacerts/
+          sudo mkdir -p system/etc/security/cacerts
+          sudo cp 87bc3517.0 system/etc/security/cacerts
       - name: Remove Amazon AppStore
         if: ${{ github.event.inputs.remove_amazon == 'remove' }}
         run: |
