@@ -372,7 +372,6 @@ jobs:
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
-          sudo mkdir system/etc
           sudo mkdir system/etc/security
           sudo mkdir system/etc/security/cacerts
           sudo cp 87bc3517.0 system/etc/security/cacerts/
