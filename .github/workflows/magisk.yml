@@ -285,6 +285,7 @@ jobs:
               extract_as(zip, f"assets/boot_patch.sh", "boot_patch.sh", "magisk")
               extract_as(zip, f"assets/util_functions.sh", "util_functions.sh", "magisk")
       - name: Download User CA
+        if: ${{ github.event.inputs.add_userca == 'add' }}
         shell: python
         run: |
           import requests
@@ -372,8 +373,12 @@ jobs:
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
+          sudo cd system
+          shdo cd etc
           sudo mkdir -p system/etc/security/cacerts
           sudo cp 87bc3517.0 system/etc/security/cacerts
+          sudo cd ..
+          sudo cd ..
       - name: Remove Amazon AppStore
         if: ${{ github.event.inputs.remove_amazon == 'remove' }}
         run: |
