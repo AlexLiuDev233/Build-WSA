@@ -360,21 +360,15 @@ jobs:
           sudo mount -o loop ${{ matrix.arch }}/vendor.img system/vendor
           sudo mount -o loop ${{ matrix.arch }}/product.img system/product
           sudo mount -o loop ${{ matrix.arch }}/system_ext.img system/system_ext
-      - name: Download User CA
-        if: ${{ github.event.inputs.add_userca != 'add' }}
-        shell: python
-        run: |
-          import requests
-          url = "https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0"
-          r = requests.get(url)
-          with open(r"87bc3517.0", "wb") as f:
-            for chunk in r.iter_content(chunk_size=512):
-              f.write(chunk)
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
           cd system
           sudo mkdir -p system/etc/security/cacerts
+          cd system
+          cd etc
+          cd security
+          cd cacerts
           sudo wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
           sudo mv ca.0 87bc3517.0
           ls
