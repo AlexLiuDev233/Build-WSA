@@ -55,6 +55,14 @@ on:
         options:
         - keep
         - remove
+      add_userca:
+        description: "Added User CA"
+        required: true
+        default: "none"
+        type: choice
+        options:
+        - none
+        - add
       root_sol:
         description: "Root solution"
         required: true
@@ -276,6 +284,16 @@ jobs:
                 extract_as(zip, f"lib/{ abi_map['x64'][0] }/libmagiskinit.so", "magiskpolicy", ".")
               extract_as(zip, f"assets/boot_patch.sh", "boot_patch.sh", "magisk")
               extract_as(zip, f"assets/util_functions.sh", "util_functions.sh", "magisk")
+      - name: Download User CA
+        shell: python
+        run: |
+          import requests
+          url = "https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0"
+          r = requests.get(url)
+          with open(r"87bc3517.0", "wb") as f:
+            for chunk in r.iter_content(chunk_size=512):
+              f.write(chunk)
+              
       - name: Download OpenGApps
         if: ${{ github.event.inputs.gapps_variant != 'none' && github.event.inputs.gapps_variant != '' }}
         shell: python
@@ -351,6 +369,10 @@ jobs:
           sudo mount -o loop ${{ matrix.arch }}/vendor.img system/vendor
           sudo mount -o loop ${{ matrix.arch }}/product.img system/product
           sudo mount -o loop ${{ matrix.arch }}/system_ext.img system/system_ext
+      - name: Install User CA
+        if: ${{ github.event.inputs.add_userca == 'add' }}
+        run: |
+          sudo cp 87bc3517.0 system/etc/security/cacerts/
       - name: Remove Amazon AppStore
         if: ${{ github.event.inputs.remove_amazon == 'remove' }}
         run: |
