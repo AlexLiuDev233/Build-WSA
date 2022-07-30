@@ -375,8 +375,8 @@ jobs:
         run: |
           cd system
           sudo mkdir -p system/etc/security/cacerts
-          wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
-          mv ca.0 87bc3517.0
+          sudo wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
+          sudo mv ca.0 87bc3517.0
           ls
           cd ..
           cd ..
