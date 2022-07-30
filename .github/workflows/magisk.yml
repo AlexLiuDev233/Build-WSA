@@ -373,13 +373,11 @@ jobs:
       - name: Install User CA
         if: ${{ github.event.inputs.add_userca == 'add' }}
         run: |
+          cd system
+          sudo mkdir -p system/etc/security/cacerts
           wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
           mv ca.0 87bc3517.0
           ls
-          cd system
-          ls
-          sudo mkdir -p system/etc/security/cacerts
-          sudo cp 87bc3517.0 system/etc/security/cacerts
           cd ..
           cd ..
       - name: Remove Amazon AppStore
