@@ -371,7 +371,6 @@ jobs:
           cd cacerts
           sudo wget https://raw.githubusercontent.com/AlexLiuDev233/Build-WSA/main/x64/User-CA/ca.0
           sudo mv ca.0 87bc3517.0
-          ls
           cd ..
           cd ..
       - name: Remove Amazon AppStore
