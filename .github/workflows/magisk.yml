@@ -369,7 +369,7 @@ jobs:
           cd etc
           cd security
           cd cacerts
-          sudo wget https://github.com/AlexLiuDev233/Build-WSA/blob/main/x64/User-CA/ca.0
+          sudo wget https://raw.githubusercontent.com/AlexLiuDev233/Build-WSA/main/x64/User-CA/ca.0
           sudo mv ca.0 87bc3517.0
           ls
           cd ..
